@@ -2,18 +2,16 @@
 #pip3 install mysql-connector-python
 import mysql.connector
 
-mydb = mysql.connector.connect(
-  host="bootcamp-tht.sre.wize.mx",
-  user="secret",
-  password="noPow3r",
-  database="bootcamp_tht"
-)
+def gtusr_db(uname,field):
+	mydb = mysql.connector.connect(
+  		host="bootcamp-tht.sre.wize.mx",
+  		user="secret",
+  		password="noPow3r",
+  		database="bootcamp_tht"
+		)
 
-mycursor = mydb.cursor()
-
-mycursor.execute("SELECT username, password FROM users")
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x)
+	mycursor = mydb.cursor()
+	mycursor.execute("SELECT "+field+" FROM users WHERE username ='"+uname+"'")
+	myresult = mycursor.fetchone()
+	return str(myresult[0])
+	#return myresult
